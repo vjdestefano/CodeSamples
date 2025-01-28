@@ -94,10 +94,8 @@ namespace demoProject
                 TriviaQuestion firstResult = json.Results[0];
                 
                 if (firstResult == null) return null;
-                else {
-                    Console.Write(firstResult.correct_answer);
-                    return firstResult;
-                    };
+                else return firstResult;
+                    
 
             }
             catch (Exception ex)
