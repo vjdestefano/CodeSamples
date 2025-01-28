@@ -27,9 +27,7 @@ namespace demoProject
             "What's your favorite season of the year?",
             "If you could learn any skill instantly, what would it be?",
             "What's your favorite hobby?"
-        };
-
-        private static readonly Random random = new Random();
+        };        
 
         /// <summary>
         /// Fetches a random trivia question from the Open Trivia Database.
@@ -69,6 +67,7 @@ namespace demoProject
         /// <returns>A random question from the casual questions list.</returns>
         public static string GetCasualQuestion()
         {
+            Random random = new Random();
             int index = random.Next(casualQuestions.Count);
             return casualQuestions[index];
         }
