@@ -45,21 +45,21 @@ namespace demoProject
                 if (triviaQuestion != null)
                 {
                     Console.WriteLine("\n=== TRIVIA QUESTION ===");
-                    if (!string.IsNullOrEmpty(triviaQuestion.Category))
-                        Console.WriteLine($"Category: {triviaQuestion.Category}");
-                    if (!string.IsNullOrEmpty(triviaQuestion.Difficulty))
-                        Console.WriteLine($"Difficulty: {triviaQuestion.Difficulty.ToUpper()}");
+                    if (!string.IsNullOrEmpty(triviaQuestion.category))
+                        Console.WriteLine($"Category: {triviaQuestion.category}");
+                    if (!string.IsNullOrEmpty(triviaQuestion.difficulty))
+                        Console.WriteLine($"Difficulty: {triviaQuestion.difficulty.ToUpper()}");
                     
-                    Console.WriteLine($"\nQ: {triviaQuestion.Question ?? "No question available"}");
+                    Console.WriteLine($"\nQ: {triviaQuestion.question ?? "No question available"}");
                     Console.Write("\nYour answer: ");
                     string answer = Console.ReadLine() ?? "";
                     
-                    Console.WriteLine($"\nCorrect answer: {triviaQuestion.CorrectAnswer ?? "No answer available"}");
+                    Console.WriteLine($"\nCorrect answer: {triviaQuestion.correct_answer ?? "No answer available"}");
                     
-                    if (triviaQuestion.IncorrectAnswers?.Count > 0)
+                    if (triviaQuestion.incorrect_answers?.Count > 0)
                     {
                         Console.WriteLine("\nOther possible answers were:");
-                        foreach (var incorrect in triviaQuestion.IncorrectAnswers)
+                        foreach (var incorrect in triviaQuestion.incorrect_answers)
                         {
                             Console.WriteLine($"- {incorrect}");
                         }

@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using demoProject.Models;
+using Newtonsoft.Json;
 
 namespace demoProject
 {
@@ -89,25 +90,15 @@ namespace demoProject
         {
             try
             {
-                var json = JObject.Parse(response);
-                var firstResult = json["results"]?[0];
+                TriviaResponse json = JsonConvert.DeserializeObject<TriviaResponse>(response) ?? new ();
+                TriviaQuestion firstResult = json.Results[0];
                 
-                if (firstResult == null)
-                    return null;
+                if (firstResult == null) return null;
+                else {
+                    Console.Write(firstResult.correct_answer);
+                    return firstResult;
+                    };
 
-                return new TriviaQuestion
-                {
-                    Category = firstResult["category"]?.ToString(),
-                    Type = firstResult["type"]?.ToString(),
-                    Difficulty = firstResult["difficulty"]?.ToString(),
-                    Question = firstResult["question"]?.ToString(),
-                    CorrectAnswer = firstResult["correct_answer"]?.ToString(),
-                    IncorrectAnswers = firstResult["incorrect_answers"]?
-                        .ToObject<List<string>>()
-                        ?.Where(a => a != null)
-                        .Select(a => a!)
-                        .ToList() ?? new List<string>()
-                };
             }
             catch (Exception ex)
             {
@@ -118,12 +109,12 @@ namespace demoProject
 
         private static void DecodeHtmlEntities(TriviaQuestion question)
         {
-            question.Question = WebUtility.HtmlDecode(question.Question);
-            question.CorrectAnswer = WebUtility.HtmlDecode(question.CorrectAnswer);
+            question.question = WebUtility.HtmlDecode(question.question);
+            question.correct_answer = WebUtility.HtmlDecode(question.correct_answer);
             
-            if (question.IncorrectAnswers != null)
+            if (question.incorrect_answers != null)
             {
-                question.IncorrectAnswers = question.IncorrectAnswers
+                question.incorrect_answers = question.incorrect_answers
                     .Select(WebUtility.HtmlDecode)
                     .ToList();
             }
