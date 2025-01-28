@@ -42,12 +42,12 @@ namespace demoProject
             try
             {
                 // Build API URL with parameters
-                var queryParams = BuildQueryParameters(difficulty, category);
-                var url = $"{apiBaseUrl}?{string.Join("&", queryParams)}";
+                List<string> queryParams = BuildQueryParameters(difficulty, category);
+                string url = $"{apiBaseUrl}?{string.Join("&", queryParams)}";
                 
                 // Fetch and parse response
-                var response = await httpClient.GetStringAsync(url);
-                var question = ParseApiResponse(response);
+                string response = await httpClient.GetStringAsync(url);
+                TriviaQuestion? question = ParseApiResponse(response);
                 
                 if (question != null)
                 {
