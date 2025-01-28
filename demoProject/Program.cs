@@ -69,7 +69,7 @@ namespace demoProject
                 else
                 {
                     Console.WriteLine("Sorry, couldn't fetch a trivia question. Here's a random question instead:");
-                    string randomQuestion = QuestionGenerator.GetRandomQuestion();
+                    string randomQuestion = QuestionGenerator.GetCasualQuestion();
                     Console.WriteLine(randomQuestion);
                     Console.Write("Your answer: ");
                     string answer = Console.ReadLine() ?? "";
@@ -77,7 +77,7 @@ namespace demoProject
             }
             else
             {
-                string randomQuestion = QuestionGenerator.GetRandomQuestion();
+                string randomQuestion = QuestionGenerator.GetCasualQuestion();
                 Console.WriteLine(randomQuestion);
                 Console.Write("Your answer: ");
                 string answer = Console.ReadLine() ?? "";

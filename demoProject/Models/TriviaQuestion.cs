@@ -9,6 +9,6 @@ namespace demoProject.Models
         public string? Difficulty { get; set; }
         public string? Question { get; set; }
         public string? CorrectAnswer { get; set; }
-        public List<string>? IncorrectAnswers { get; set; }
+        public List<string> IncorrectAnswers { get; set; } = new List<string>();
     }
 }
