@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\vjdestefano\\CodeSamples\\demoProject\\demoProject.csproj": {}
+    "C:\\Users\\datse\\DevWork\\CodeSamples\\demoProject\\demoProject.csproj": {}
   },
   "projects": {
-    "C:\\vjdestefano\\CodeSamples\\demoProject\\demoProject.csproj": {
+    "C:\\Users\\datse\\DevWork\\CodeSamples\\demoProject\\demoProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\vjdestefano\\CodeSamples\\demoProject\\demoProject.csproj",
+        "projectUniqueName": "C:\\Users\\datse\\DevWork\\CodeSamples\\demoProject\\demoProject.csproj",
         "projectName": "demoProject",
-        "projectPath": "C:\\vjdestefano\\CodeSamples\\demoProject\\demoProject.csproj",
+        "projectPath": "C:\\Users\\datse\\DevWork\\CodeSamples\\demoProject\\demoProject.csproj",
         "packagesPath": "C:\\Users\\datse\\.nuget\\packages\\",
-        "outputPath": "C:\\vjdestefano\\CodeSamples\\demoProject\\obj\\",
+        "outputPath": "C:\\Users\\datse\\DevWork\\CodeSamples\\demoProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\datse\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -42,6 +42,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
