@@ -89,7 +89,7 @@ namespace demoProject
         {
             try
             {
-                var json = JToken.Parse(response);
+                var json = JObject.Parse(response);
                 var firstResult = json["results"]?[0];
                 
                 if (firstResult == null)
