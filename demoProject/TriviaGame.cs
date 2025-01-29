@@ -42,6 +42,7 @@ namespace TriviaGame{
 
         }
         private void AskQuestion(){
+            if(this._CurrentQuestion == null) throw new Exception("current question did not return from API");
             Console.WriteLine("\n=== TRIVIA QUESTION ===");
             if (!string.IsNullOrEmpty(this._CurrentQuestion.category))
             Console.WriteLine($"Category: {this._CurrentQuestion.category}");
@@ -71,6 +72,9 @@ namespace TriviaGame{
         }             
 
         public void CheckIfCorrect(string userAnswer){
+            if(this._CurrentQuestion == null) throw new Exception("current question did not return from API");
+            if(this._CurrentQuestion.correct_answer == null) throw new Exception("Had trouble recieving the correct answer");
+            
             if(userAnswer.ToLower() == _CurrentQuestion.correct_answer.ToLower()){
                 Console.WriteLine("That was correct! + 1");
                 SetScore(++_Score);
