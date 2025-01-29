@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using demoProject.Models;
+using TriviaGame;
 
 namespace demoProject
 {
@@ -37,43 +38,12 @@ namespace demoProject
             // Ask a trivia or random question
             Console.WriteLine($"\nHey {name}, let me ask you something!");
             Console.Write("Would you like a trivia question? (y/n): ");
-            bool useTrivia = (Console.ReadLine()?.ToLower().StartsWith("y") ?? false);
+            bool useTrivia = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
             if (useTrivia)
             {
-                var triviaQuestion = await QuestionGenerator.GetTriviaQuestion();
-                if (triviaQuestion != null)
-                {
-                    Console.WriteLine("\n=== TRIVIA QUESTION ===");
-                    if (!string.IsNullOrEmpty(triviaQuestion.category))
-                        Console.WriteLine($"Category: {triviaQuestion.category}");
-                    if (!string.IsNullOrEmpty(triviaQuestion.difficulty))
-                        Console.WriteLine($"Difficulty: {triviaQuestion.difficulty.ToUpper()}");
-                    
-                    Console.WriteLine($"\nQ: {triviaQuestion.question ?? "No question available"}");
-                    Console.Write("\nYour answer: ");
-                    string answer = Console.ReadLine() ?? "";
-                    
-                    Console.WriteLine($"\nCorrect answer: {triviaQuestion.correct_answer ?? "No answer available"}");
-                    
-                    if (triviaQuestion.incorrect_answers?.Count > 0)
-                    {
-                        Console.WriteLine("\nOther possible answers were:");
-                        foreach (var incorrect in triviaQuestion.incorrect_answers)
-                        {
-                            Console.WriteLine($"- {incorrect}");
-                        }
-                    }
-                    Console.WriteLine("=====================");
-                }
-                else
-                {
-                    Console.WriteLine("Sorry, couldn't fetch a trivia question. Here's a random question instead:");
-                    string randomQuestion = QuestionGenerator.GetCasualQuestion();
-                    Console.WriteLine(randomQuestion);
-                    Console.Write("Your answer: ");
-                    string answer = Console.ReadLine() ?? "";
-                }
+                    TriviaGameRunner Game = new TriviaGameRunner(name);
+                    await Game.RunGame();
             }
             else
             {

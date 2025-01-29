@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\datse\\DevWork\\CodeSamples\\demoProject\\demoProject.csproj": {}
+    ".\\CodeSamples\\demoProject\\demoProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\datse\\DevWork\\CodeSamples\\demoProject\\demoProject.csproj": {
+    ".\\CodeSamples\\demoProject\\demoProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\datse\\DevWork\\CodeSamples\\demoProject\\demoProject.csproj",
+        "projectUniqueName": ".\\CodeSamples\\demoProject\\demoProject.csproj",
         "projectName": "demoProject",
-        "projectPath": "C:\\Users\\datse\\DevWork\\CodeSamples\\demoProject\\demoProject.csproj",
-        "packagesPath": "C:\\Users\\datse\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\datse\\DevWork\\CodeSamples\\demoProject\\obj\\",
+        "projectPath": ".\\CodeSamples\\demoProject\\demoProject.csproj",
+        "packagesPath": ".\\.nuget\\packages\\",
+        "outputPath": ".\\CodeSamples\\demoProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\datse\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          ".\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
