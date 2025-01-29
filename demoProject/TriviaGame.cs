@@ -36,7 +36,7 @@ namespace TriviaGame{
 
                 AskQuestion();
                 ShowScore();
-                AskToContinue();
+                await AskToContinue();
                 
             }
 
@@ -91,13 +91,14 @@ namespace TriviaGame{
             Console.WriteLine($"{this._User}'s score: {this._Score}");
         }
 
-        public async void AskToContinue(){
+        public async Task AskToContinue(){
             Console.WriteLine($"{this._User} - do you want to continue? (y/n)");
             bool continueTrvia = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
             SetContinueGame(continueTrvia);
             if(continueTrvia){
                 var nextQuestion = await GetQuestion();
-                SetCurrentQuestion(nextQuestion);
+                if(nextQuestion != null) SetCurrentQuestion(nextQuestion);
+                else SetContinueGame(false);
             }
         }
 
