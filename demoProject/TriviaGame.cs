@@ -8,7 +8,7 @@ namespace TriviaGame{
 
     public class TriviaGameRunner{
 
-        private TriviaQuestion _CurrentQuestion {get; set;} = new();
+        private TriviaQuestion? _CurrentQuestion {get; set;}
         private int _Score {get; set;}
         private string _User {get; set;}
         private bool _ContinueGame {get; set;} = true;
@@ -18,18 +18,26 @@ namespace TriviaGame{
             this._User = user;
         }
 
+        private async Task<bool> StartGame(){
+            var question = await GetQuestion();
+            
+            if(question != null){
+                SetCurrentQuestion(question);
+                return true;
+            } 
+            else return false;
+        }
 
         public async Task RunGame (){
 
-            var question = await GetQuestion();
-            SetCurrentQuestion(question);
+            bool startGame = await StartGame();
+            if(!startGame) return;
             while(this._ContinueGame){
 
                 AskQuestion();
                 ShowScore();
                 AskToContinue();
-                var nextQuestion = await GetQuestion();
-                SetCurrentQuestion(nextQuestion);
+                
             }
 
         }
@@ -44,7 +52,7 @@ namespace TriviaGame{
             Console.Write("\nYour answer: ");
             string answer = Console.ReadLine() ?? "";
 
-            CheckIfCorrect(answer);
+            CheckIfCorrect(answer);            
 
             if (this._CurrentQuestion.incorrect_answers?.Count > 0)
             {
@@ -57,16 +65,20 @@ namespace TriviaGame{
             Console.WriteLine("=====================");
         }
 
-        private async Task<TriviaQuestion> GetQuestion (){
-            TriviaQuestion question = await QuestionGenerator.GetTriviaQuestion();
+        private async Task<TriviaQuestion?> GetQuestion (){
+            TriviaQuestion? question = await QuestionGenerator.GetTriviaQuestion();
             return question;
         }             
 
         public void CheckIfCorrect(string userAnswer){
-            if(userAnswer.ToLower() == _CurrentQuestion.correct_answer.ToLower()) SetScore(_Score++);
+            if(userAnswer.ToLower() == _CurrentQuestion.correct_answer.ToLower()){
+                Console.WriteLine("That was correct! + 1");
+                SetScore(++_Score);
+            }
             else if(_CurrentQuestion.correct_answer.ToLower().Contains(userAnswer.ToLower())){
                 Console.WriteLine("That was close! I will give it to you! + 1");
-                SetScore(_Score++);
+                Console.WriteLine($"The correct answer was {_CurrentQuestion.correct_answer}");
+                SetScore(++_Score);
             }
             else Console.WriteLine($"That is incorrect - the correct answer was {_CurrentQuestion.correct_answer}");
         }
@@ -75,10 +87,14 @@ namespace TriviaGame{
             Console.WriteLine($"{this._User}'s score: {this._Score}");
         }
 
-        public void AskToContinue(){
+        public async void AskToContinue(){
             Console.WriteLine($"{this._User} - do you want to continue? (y/n)");
             bool continueTrvia = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
             SetContinueGame(continueTrvia);
+            if(continueTrvia){
+                var nextQuestion = await GetQuestion();
+                SetCurrentQuestion(nextQuestion);
+            }
         }
 
         private void SetCurrentQuestion(TriviaQuestion triviaQuestion){
