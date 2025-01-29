@@ -5,10 +5,18 @@ using TriviaGame;
 
 namespace demoProject
 {
+    /// <summary>
+    /// Main program class that handles the interactive trivia game experience.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Entry point of the application. Manages user interaction and game flow.
+        /// </summary>
+        /// <param name="args">Command line arguments - expects the user's name</param>
         static async Task Main(string[] args)
         {
+            // Validate command line arguments for proper usage
             if (args.Length == 0)
             {
                 Console.WriteLine("Usage: dotnet run -- <your name>");
@@ -20,10 +28,10 @@ namespace demoProject
             Console.WriteLine($"Hello, {name}!");
             Console.WriteLine($"Welcome to our demo console application.");
             
-            // Show the time of execution
+            // Display current time to provide context
             Console.WriteLine($"\nCurrent time: {DateTime.Now}");
             
-            // Create a personalized message based on time of day
+            // Generate dynamic greeting based on the time of day using pattern matching
             int hour = DateTime.Now.Hour;
             string timeMessage = hour switch
             {
@@ -35,18 +43,21 @@ namespace demoProject
             
             Console.WriteLine($"{timeMessage}, {name}!");
 
-            // Ask a trivia or random question
+            // Let user choose between trivia and casual questions
             Console.WriteLine($"\nHey {name}, let me ask you something!");
             Console.Write("Would you like a trivia question? (y/n): ");
             bool useTrivia = Console.ReadLine()?.ToLower().StartsWith("y") ?? false;
 
+            // Handle game flow based on user's choice
             if (useTrivia)
             {
-                    TriviaGameRunner Game = new TriviaGameRunner(name);
-                    await Game.RunGame();
+                // Start trivia game session
+                TriviaGameRunner Game = new TriviaGameRunner(name);
+                await Game.RunGame();
             }
             else
             {
+                // Present a casual conversation question
                 string randomQuestion = QuestionGenerator.GetCasualQuestion();
                 Console.WriteLine(randomQuestion);
                 Console.Write("Your answer: ");
